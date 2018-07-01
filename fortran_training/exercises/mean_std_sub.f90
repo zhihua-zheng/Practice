@@ -5,13 +5,12 @@ program mean_std_sub
   real, allocatable :: a(:)
   real              :: mean, std, sum=0., sq_sum=0.
 
-  allocate(a(n))
-
   do while (n<=0)
      print*, 'Enter the number of values (positive) you want to investigste'
      read*, n
   end do
 
+  allocate(a(n))
   print*, 'Please enter a series of values you want to deal with:'
 
 ! enable positive number restrict
