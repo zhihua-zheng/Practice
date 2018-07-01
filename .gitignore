@@ -1,0 +1,7 @@
+# ignore compiled executable files #
+*.out
+*.o
+
+# ignore slides and examples #
+/fortran_training/examples
+/fortran_training/slides
