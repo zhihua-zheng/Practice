@@ -1,28 +1,32 @@
 program mean_std
 
+! input check (iostat) added on July 1 2018, Zhihua Zheng
+
   implicit none
-  integer :: i
-  real :: mean, std, sum, sq_sum, tmp
-  integer, parameter :: num = 10
+  integer :: i=1, io, num=0
+  real :: mean, std, sum=0., sq_sum=0., tmp
 
-  i = 0
-  sum = 0
-  sq_sum = 0
-  print*, 'Please enter ', num, ' positive real numbers:'
+  print*, 'How many numbers do you want to input?'
+  do while (num<=0)
+     read(*,*,iostat=io) num
+     if (io/=0) then
+        print*, 'Check input, something is wrong!'
+        print*
+        print*, 'How many numbers do you want to input?'
+     end if
+  end do
 
-  do while (i<num)
-      read*, tmp
-
-      if (tmp<=0) then
-
-         print*, 'Please enter a positive one!'
-         cycle
-      else
-
-          sum = sum + tmp
-          sq_sum = sq_sum + tmp**2
-          i = i + 1
-      end if
+  print*, 'Please enter', num, 'real numbers to proceed:'
+  do while (i<=num)
+      read(*,*,iostat=io) tmp
+      if (io==0) then
+         i=i+1
+	     sum = sum + tmp
+	     sq_sum = sq_sum + tmp**2
+	  else
+	     print*, 'Please only enter numbers! Try again...'
+	     cycle
+	  end if
   end do
 
   mean = sum/num

@@ -1,34 +1,37 @@
 program mean_std_sub
 
   implicit none
-  integer           :: i=1, n=0
+  integer           :: i, io, n=0
   real, allocatable :: a(:)
   real              :: mean, std, sum=0., sq_sum=0.
 
+  print*, 'Enter the number of values (positive) you want to investigste'
   do while (n<=0)
-     print*, 'Enter the number of values (positive) you want to investigste'
-     read*, n
+     read(*,*,iostat=io) n
+     if (io/=0) then
+        print*, 'Check input, something is wrong!'
+        print*
+        print*, 'Enter the number of values (positive) you want to investigste'
+     end if
   end do
 
   allocate(a(n))
-  print*, 'Please enter a series of values you want to deal with:'
+  print*, 'Please enter', n, 'numbers to proceed:'
 
-! enable positive number restrict
-  do while (i<=n)
-      read*, a(i)
-      if (a(i)<=0) then
-         print*, 'Please enter a positive one!'
-         cycle
-      else
-         i=i+1
-      end if
-  end do
+! enable positive number restrict, using cycle is not good!
+!   do while (i<=n)
+!       read*, a(i)
+!       if (a(i)<=0) then
+!          print*, 'Please enter a positive one!'
+!          cycle
+!       else
+!          i=i+1
+!       end if
+!   end do
 ! enable positive number restrict
 
 ! no positive number limitation
-!
-! read*, (a(i), i=1,n)
-!
+  read*, (a(i), i=1,n)
 ! no positive number limitation
 
   call calculation(mean,std,a)
