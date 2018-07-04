@@ -34,5 +34,4 @@ program mean_std
 
   print*, 'The mean value of this series of numbers you entered is: ', mean
   print*, 'The standard deviation of this series of numbers you entered is: ', std
-
 end program mean_std

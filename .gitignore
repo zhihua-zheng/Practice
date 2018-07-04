@@ -1,6 +1,11 @@
 # ignore compiled executable files #
 *.out
 *.o
+*.mod
+
+# ignore data file #
+*.dat
+*.2
 
 # ignore slides and examples #
 /fortran_training/examples
