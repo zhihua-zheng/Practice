@@ -20,7 +20,7 @@ module ex3_mod
   end function mean_std
 ! --------- compute mean and standard deviation
 
-! --------- compute second order derivative
+! --------- compute second order derivative, forward finite difference
   function aprime2(a,np,h)
       implicit none
 	  integer, intent(in) :: np
@@ -33,6 +33,6 @@ module ex3_mod
 	  aprime2(1)=0.
 	  aprime2(np)=0.
   end function aprime2
-! --------- compute second order derivative
+! --------- compute second order derivative, forward finite difference
 
 end module ex3_mod

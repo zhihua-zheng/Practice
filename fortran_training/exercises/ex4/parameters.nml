@@ -1,0 +1,30 @@
+!-------------------------------------------------------------------------------
+! inputs
+!-------------------------------------------------------------------------------
+! nx - number of grid points in x direction
+!
+! ny - number of grid points in x direction
+!
+! init - string for the name of initial file
+!
+! output - string for the name of output file
+!
+! time - integration time
+!
+! kappa - diffusivity
+!
+! a - time step constants
+!
+! dh - grid spacing, same for x and y direction
+!-------------------------------------------------------------------------------
+
+&inputs
+   nx = 43,
+   ny = 21,
+   init = 'initial_T.dat'
+   output = 'final_T.dat'
+   time = 0.1
+   kappa = 1
+   a = 0.22  ! maximum critical value is about 0.25 after which, unstable
+   dh = 0.1
+/
