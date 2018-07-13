@@ -34,16 +34,16 @@ program twoD_diffusion_main
   open(3,file=output)
 
   do while (tt<=time)
-     dT2 = aaprime2(T,dh)
+     dT2 = del2(T,dh)
      do i=2,ny-1
        do j=2,nx-1
         T(i,j) = T(i,j)+dt*kappa*dT2(i,j)
        end do
      end do
-     T(1,:)=0
-     T(ny,:)=0
-     T(:,1)=0
-     T(:,nx)=0
+     T(1,:)=0.
+     T(ny,:)=0.
+     T(:,1)=0.
+     T(:,nx)=0.
 
      tt=tt+dt
   end do

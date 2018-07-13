@@ -13,18 +13,27 @@
 !
 ! kappa - diffusivity
 !
-! a - time step constants
+! a_dif - time step constant for diffusion
 !
-! dh - grid spacing, same for x and y direction
+! a_adv - time step constant for advection
+!
+! dx - grid spacing for x direction
+!
+! dy - grid spacing for y direction
+!
+! B - the strength of flow
 !-------------------------------------------------------------------------------
 
 &inputs
-   nx = 87,
-   ny = 43,
+   nx = 100
+   ny = 100
    init = 'initial_T.dat'
    output = 'final_T.dat'
-   time = 0.1
+   time = 0.5
    kappa = 1
-   a = 0.22 ! maximum critical value is about 0.25, after which, unstable solution occurs.
-   dh = 0.08
+   a_dif = 0.3
+   a_adv = 0.6
+   dx = 0.01
+   dy = 0.01
+   B = 10
 /
