@@ -25,15 +25,15 @@
 !-------------------------------------------------------------------------------
 
 &inputs
-   nx = 100
-   ny = 100
+   nx = 50
+   ny = 50
    init = 'initial_T.dat'
    output = 'final_T.dat'
    time = 0.5
    kappa = 1
-   a_dif = 0.3
+   a_dif = 0.2 ! maximum critical value is about 0.25, after which, unstable solution occurs.
    a_adv = 0.6
-   dx = 0.01
-   dy = 0.01
-   B = 10
+   dx = 0.02
+   dy = 0.02
+   B = 100
 /

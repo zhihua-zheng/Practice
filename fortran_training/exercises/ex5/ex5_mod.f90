@@ -79,9 +79,9 @@ module ex5_mod
     do i=1,ny
       do j=2,nx-1
         if (vx(i,j) > 0) then
-          vx_dTdx = vx(i,j)*(a(i,j)-a(i,j-1))/dx
+          vx_dTdx(i,j) = vx(i,j)*(a(i,j)-a(i,j-1))/dx
         else
-          vx_dTdx = vx(i,j)*(a(i,j+1)-a(i,j))/dx
+          vx_dTdx(i,j) = vx(i,j)*(a(i,j+1)-a(i,j))/dx
         end if
       end do
     end do
@@ -91,9 +91,9 @@ module ex5_mod
     do j=1,nx
       do i=2,ny-1
         if (vy(i,j) > 0) then
-          vy_dTdy = vy(i,j)*(a(i,j)-a(i-1,j))/dy
+          vy_dTdy(i,j) = vy(i,j)*(a(i,j)-a(i-1,j))/dy
         else
-          vy_dTdy = vy(i,j)*(a(i+1,j)-a(i,j))/dy
+          vy_dTdy(i,j) = vy(i,j)*(a(i+1,j)-a(i,j))/dy
         end if
       end do
     end do

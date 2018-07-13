@@ -42,6 +42,7 @@ program twoD_advec_diffu_main
   T(1,:) = 1.
   T(ny,:) = 0.
 
+  ! save initial temperature
   open(2,file=init)
   do j=1,nx
     do i=1,ny
@@ -65,6 +66,15 @@ program twoD_advec_diffu_main
   u =  aprime(psi,dy)
   v = -aprime(psi,dx,2)
 
+  ! save the flow information
+  open(4,file='flow.dat')
+  do j=1,nx
+    do i=1,ny
+      write(4,*) psi(i,j), x(i,j), y(i,j), u(i,j), v(i,j)
+    end do
+  end do
+  close(4)
+
   ! find the maximum velocity
   u_max = u(1,1)
   v_max = v(1,1)
@@ -79,6 +89,9 @@ program twoD_advec_diffu_main
       end if
     end do
   end do
+
+  ! print*, u_max
+  ! print*, v_max
 
   ! determine timestep
   dt=min(a_dif*(min(dx,dy))**2/kappa, a_adv*min(dx/u_max,dy/v_max))
@@ -100,12 +113,15 @@ program twoD_advec_diffu_main
      T(:,1) = T(:,2)
      T(:,nx) = T(:,nx-1)
 
+     ! write(3,*)
+     ! write(3,*) 'At time ', tt, 'the temperature:'
+
      tt=tt+dt
   end do
 
   do j=1,nx
     do i=1,ny
-     write(3,*) T(i,j)
+     write(3,*) T(i,j), dT2(i,j), v_gradT(i,j)
     end do
   end do
   close(3)
