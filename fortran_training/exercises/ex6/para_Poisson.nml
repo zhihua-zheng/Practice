@@ -1,0 +1,28 @@
+!-------------------------------------------------------------------------------
+! inputs
+!-------------------------------------------------------------------------------
+! nx - number of grid points in x direction
+!
+! ny - number of grid points in x direction
+!
+! source - string indicating which type of source function in Poisson equation to use
+!
+! iteration - string indicating which type of iteration method to use
+!
+! h - grid spacing for both dimension
+!
+! alpha - relaxation coefficient in iteration
+!
+! output - string for the name of output file
+!-------------------------------------------------------------------------------
+
+&inputs
+   nx = 17 ! should be power-of-two plus 1
+   ny = 17 ! should be power-of-two plus 1
+   source = 'spike'
+ ! source = 'random'
+   iteration = 'V_cycle'
+  !iteration = 'regular'
+   alpha = 0.7
+   output = 'f_u_Poisson.dat'
+/
