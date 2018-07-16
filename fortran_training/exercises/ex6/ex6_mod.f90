@@ -89,7 +89,7 @@ end function rmsq
   subroutine restrict(fine,coarse)
     implicit none
     real, intent(in)  :: fine(:,:) ! the residue array of fine grid
-    real, allocatable, intent(out) :: coarse(:,:) ! the residue of coarse grid
+    real, intent(out) :: coarse(:,:) ! the residue of coarse grid
     ! local variables
     integer :: i, j, nx, ny, nx_c, ny_c
 
@@ -97,7 +97,6 @@ end function rmsq
     nx = size(fine,2)
     ny_c = 1+(ny-1)/2
     nx_c = 1+(nx-1)/2
-    allocate(coarse(ny_c,nx_c))
 
     do i=1,ny,2
       do j=1,nx,2
@@ -105,16 +104,15 @@ end function rmsq
       end do
     end do
 
-    deallocate(coarse)
   end subroutine restrict
 ! --- copy every other point in fine grid into coarse grid
 
 
 ! --- get coarse grid correction back to fine grid and interpolate linearly
-  subroutine prolongate(fine,coarse)
+  subroutine prolongate(coarse,fine)
     implicit none
     real, intent(in)  :: coarse(:,:)
-    real, allocatable, intent(out) :: fine(:,:)
+    real, intent(out) :: fine(:,:)
     ! local variables
     integer :: i, j, nx, ny, nx_f, ny_f
 
@@ -122,7 +120,6 @@ end function rmsq
     nx = size(coarse,2)
     ny_f = 1+(ny-1)*2
     nx_f = 1+(nx-1)*2
-    allocate(fine(ny_f,nx_f))
 
     !! project values from coarse grid to fine grid
     do i=1,ny
@@ -146,7 +143,6 @@ end function rmsq
       end do
     end do
 
-    deallocate(fine)
   end subroutine prolongate
 ! --- get coarse grid correction back to fine grid and interpolate linearly
 
@@ -186,14 +182,14 @@ end function rmsq
        call restrict(res_f,res_c) ! to get 'res_c'
 
        !---------- solve for the coarse grid correction -----------
-       corr_c = 0.
+       corr_c = 0.  ! solution of coarse grid starts from zero
        res_rms = Vcycle_2DPoisson(corr_c,res_c,h*2) ! *RECURSIVE CALL*
 
        !---- prolongate (interpolate) the correction to the fine grid
-       call prolongate(corr_c,corr_f)
+       call prolongate(corr_c,corr_f) ! to get 'corr_f'
 
        !---------- correct the fine-grid solution -----------------
-       u_f = u_f - corr_f
+       u_f = u_f - corr_f ! negative sign in corr_f
 
        !---------- two more smoothing iterations on the fine grid---
        res_rms = iteration_2DPoisson(u_f,rhs,h,alpha)

@@ -51,15 +51,22 @@ program Poisson_2D_solver_main
 
   ! determine which iteration method to use
   if (iteration .eq. 'V_cycle') then
-    res_rms = Vcycle_2DPoisson(u,f,h)
-    print*, 'res_rms = ', res_rms
+
+    do while (res_rms/f_rms >= err)
+      res_rms = Vcycle_2DPoisson(u,f,h)
+      it = it+1 ! record the number of iterations
+    end do
+    print*
+    print*, 'It takes', it, 'iterations for ', iteration, ' iteration method.'
 
   else if (iteration .eq. 'regular') then
+
     do while (res_rms/f_rms >= err)
       res_rms = iteration_2DPoisson(u,f,h,alpha)
       it = it+1 ! record the number of iterations
     end do
-    print*, 'It takes', it-1, 'iterations for ', iteration, ' iteration method.'
+    print*
+    print*, 'It takes', it, 'iterations for ', iteration, ' iteration method.'
 
   else
     stop 'ERROR: unsupported iteration method, please try again!'

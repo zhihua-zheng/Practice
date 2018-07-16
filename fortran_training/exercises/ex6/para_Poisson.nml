@@ -22,7 +22,7 @@
    source = 'spike'
  ! source = 'random'
    iteration = 'V_cycle'
-  !iteration = 'regular'
+ ! iteration = 'regular'
    alpha = 0.7
    output = 'f_u_Poisson.dat'
 /
