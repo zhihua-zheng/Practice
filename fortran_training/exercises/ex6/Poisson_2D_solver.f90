@@ -47,7 +47,7 @@ program Poisson_2D_solver_main
   ! compute rms value of initial residue field
   res_rms = rmsq(res)
 
-! Solve the Poison equation using iteration relaxation
+! Solve the Poisson equation using iteration relaxation
 
   ! determine which iteration method to use
   if (iteration .eq. 'V_cycle') then
@@ -57,7 +57,7 @@ program Poisson_2D_solver_main
       it = it+1 ! record the number of iterations
     end do
     print*
-    print*, 'It takes', it, 'iterations for ', iteration, ' iteration method.'
+    print*, 'It takes', it-1, 'iterations for ', iteration, ' iteration method.'
 
   else if (iteration .eq. 'regular') then
 

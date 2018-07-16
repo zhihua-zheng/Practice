@@ -17,12 +17,12 @@
 !-------------------------------------------------------------------------------
 
 &inputs
-   nx = 17 ! should be power-of-two plus 1
-   ny = 17 ! should be power-of-two plus 1
+   nx = 257 ! should be power-of-two plus 1
+   ny = 257 ! should be power-of-two plus 1
    source = 'spike'
  ! source = 'random'
-   iteration = 'V_cycle'
- ! iteration = 'regular'
+ ! iteration = 'V_cycle'
+   iteration = 'regular'
    alpha = 0.7
    output = 'f_u_Poisson.dat'
 /

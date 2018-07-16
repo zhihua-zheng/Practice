@@ -70,6 +70,7 @@ end function rmsq
 
     ny = size(u,1)
     nx = size(u,2)
+    res = 0.
 
     do i=2,ny-1
       do j=2,nx-1
@@ -81,6 +82,7 @@ end function rmsq
     res(ny,:) = -f(ny,:)
     res(:,1) = -f(:,1)
     res(:,nx) = -f(:,nx)
+
   end subroutine residue_2DPoisson
 ! --- calculate the residue in array 'res'
 
@@ -89,14 +91,15 @@ end function rmsq
   subroutine restrict(fine,coarse)
     implicit none
     real, intent(in)  :: fine(:,:) ! the residue array of fine grid
-    real, intent(out) :: coarse(:,:) ! the residue of coarse grid
+    real, intent(out) :: coarse(1+(size(fine,1)-1)/2,1+(size(fine,2)-1)/2)
+    ! the residue of coarse grid
+
     ! local variables
-    integer :: i, j, nx, ny, nx_c, ny_c
+    integer :: i, j, nx, ny
 
     ny = size(fine,1)
     nx = size(fine,2)
-    ny_c = 1+(ny-1)/2
-    nx_c = 1+(nx-1)/2
+    coarse = 0.
 
     do i=1,ny,2
       do j=1,nx,2
@@ -112,7 +115,7 @@ end function rmsq
   subroutine prolongate(coarse,fine)
     implicit none
     real, intent(in)  :: coarse(:,:)
-    real, intent(out) :: fine(:,:)
+    real, intent(out) :: fine(1+(size(coarse,1)-1)*2,1+(size(coarse,2)-1)*2)
     ! local variables
     integer :: i, j, nx, ny, nx_f, ny_f
 
@@ -120,6 +123,7 @@ end function rmsq
     nx = size(coarse,2)
     ny_f = 1+(ny-1)*2
     nx_f = 1+(nx-1)*2
+    fine = 0.
 
     !! project values from coarse grid to fine grid
     do i=1,ny
